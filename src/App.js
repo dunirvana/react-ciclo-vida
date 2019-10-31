@@ -1,26 +1,37 @@
-import React from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ComponenteTeste from './ComponenteTeste';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { showComponent: false };
+
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick() {
+    this.setState((state) => ({ 
+      showComponent: !state.showComponent 
+    }));
+  }
+
+  render() {
+    return (
+
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+
+          <input type="button" value={ this.state.showComponent ? "Esconder componente" : "Mostrar componente" } onClick={this.onClick} />
+          { this.state.showComponent ? <ComponenteTeste teste={this.state.showComponent} /> : null }
+
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;
